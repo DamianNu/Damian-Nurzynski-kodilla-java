@@ -24,12 +24,8 @@ public class ShapeCollector {
     }
 
     public Shape getFigure(int n) {
-        if (n < shapes.size() && n>=0) {
             Shape shapeX = shapes.get(n);
             return shapeX;
-        } else {
-            return null;
-        }
 
     }
     public String showFigures(){
