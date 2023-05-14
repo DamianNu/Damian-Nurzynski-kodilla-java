@@ -72,7 +72,7 @@ class WeatherForecastTestSuite {
         WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
 
         //When
-       double averageTemperature = weatherForecast.AverageTemperature(temperaturesMock);
+       double averageTemperature = weatherForecast.averageTemperature(temperaturesMock);
 
         //Then
         Assertions.assertEquals(25.56, averageTemperature);
@@ -92,7 +92,7 @@ class WeatherForecastTestSuite {
         WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
 
         //When
-        double medianTemperature = weatherForecast.MedianTemperature(temperaturesMock);
+        double medianTemperature = weatherForecast.medianTemperature(temperaturesMock);
 
         //Then
         Assertions.assertEquals(25.5, medianTemperature);

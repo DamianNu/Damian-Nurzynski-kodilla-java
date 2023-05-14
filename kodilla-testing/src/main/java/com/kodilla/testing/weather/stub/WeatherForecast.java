@@ -24,7 +24,7 @@ public class WeatherForecast {
         }
         return resultMap;
     }
-    public double AverageTemperature(Temperatures temperatures){
+    public double averageTemperature(Temperatures temperatures){
         double averageTem = 0;
         double number = 0;
         for (Map.Entry<String, Double> temperature :
@@ -36,7 +36,7 @@ public class WeatherForecast {
         return result;
     }
 
-    public double MedianTemperature(Temperatures temperatures){
+    public double medianTemperature(Temperatures temperatures){
         ArrayList<Double> AllTemperatures = new ArrayList<>();
         for (Map.Entry<String, Double> temperature :
                 temperatures.getTemperatures().entrySet()) {
