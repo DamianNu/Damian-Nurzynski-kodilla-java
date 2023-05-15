@@ -115,7 +115,6 @@ class BookDirectoryTestSuite {
     }
     @Mock
     private LibraryDatabase libraryDatabaseMock;
-
     @DisplayName("Test: List Books In Hands Of when he has 0 book ")
     @Test
     void testListBooksInHandsOf() {
@@ -142,10 +141,6 @@ class BookDirectoryTestSuite {
         assertEquals(1, theListOfHandsBooks1.size());
         assertEquals(5, theListOfHandsBooks5.size());
         }
-
-
-}
-
-
+    }
 }
 
