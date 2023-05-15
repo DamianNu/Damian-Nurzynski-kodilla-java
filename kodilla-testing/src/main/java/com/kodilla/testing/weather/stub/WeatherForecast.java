@@ -37,19 +37,19 @@ public class WeatherForecast {
     }
 
     public double medianTemperature(Temperatures temperatures){
-        ArrayList<Double> AllTemperatures = new ArrayList<>();
+        ArrayList<Double> allTemperatures = new ArrayList<>();
         for (Map.Entry<String, Double> temperature :
                 temperatures.getTemperatures().entrySet()) {
-            AllTemperatures.add(temperature.getValue());
+            allTemperatures.add(temperature.getValue());
         }
-        Collections.sort(AllTemperatures);
-        if(AllTemperatures.size()%2==0){
-            int a = AllTemperatures.size()/2;
-            double result = (AllTemperatures.get(a)+AllTemperatures.get(a-1))/2;
+        Collections.sort(allTemperatures);
+        if(allTemperatures.size()%2==0){
+            int a = allTemperatures.size()/2;
+            double result = (allTemperatures.get(a)+allTemperatures.get(a-1))/2;
             return result;
         } else {
-            int a = AllTemperatures.size()/2;
-            double result = AllTemperatures.get(a);
+            int a = allTemperatures.size()/2;
+            double result = allTemperatures.get(a);
             return result;
         }
 
