@@ -104,44 +104,48 @@ class BookDirectoryTestSuite {
 @Nested
 @DisplayName("Method : listBooksInHandsOf(LibraryUser libraryUser) ")
     class ListBooksInHandsOf{
+
+    private List<Book> generateListOfBooks(int booksQuantity) {
+        List<Book> resultList = new ArrayList<>();
+        for (int n = 1; n <= booksQuantity; n++) {
+            Book theBook = new Book("Title " + n, "Author " + n, 1970 + n);
+            resultList.add(theBook);
+        }
+        return resultList;
+    }
+    @Mock
+    private LibraryDatabase libraryDatabaseMock;
+
     @DisplayName("Test: List Books In Hands Of when he has 0 book ")
     @Test
-    void testListBooksInHandsOf_WhenHeHas0Book() {
-        // Given
+    void testListBooksInHandsOf() {
+
+        //Given
+        List<Book> resultHandsBookList0 = generateListOfBooks(0);
+        List<Book> resultHandsBookList1 = generateListOfBooks(1);
+        List<Book> resultHandsBookList5 = generateListOfBooks(5);
+        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+        LibraryUser user1 = new LibraryUser("Adam","Kowalski","9090213");
+        LibraryUser user2 = new LibraryUser("Magda","Rybka","9090215");
+        LibraryUser user3 = new LibraryUser("Jacek","Wiśnia","909016");
+        when(libraryDatabaseMock.listBooksInHandsOf(user1)).thenReturn(resultHandsBookList0);
+        when(libraryDatabaseMock.listBooksInHandsOf(user2)).thenReturn(resultHandsBookList1);
+        when(libraryDatabaseMock.listBooksInHandsOf(user3)).thenReturn(resultHandsBookList5);
+
+        //When
+        List<Book> theListOfHandsBooks0 = bookLibrary.listBooksInHandsOf(user1);
+        List<Book> theListOfHandsBooks1 = bookLibrary.listBooksInHandsOf(user2);
+        List<Book> theListOfHandsBooks5 = bookLibrary.listBooksInHandsOf(user3);
+
+        //Then
+        assertEquals(0, theListOfHandsBooks0.size());
+        assertEquals(1, theListOfHandsBooks1.size());
+        assertEquals(5, theListOfHandsBooks5.size());
+        }
 
 
-        // When
+}
 
 
-        // Then
-
-    }
-
-    @DisplayName("Test: List Books In Hands Of when he has 1 book ")
-    @Test
-    void testListBooksInHandsOf_WhenHeHas1Book() {
-        // Given
-
-
-        // When
-
-
-        // Then
-
-    }
-    @DisplayName("Test: List Books In Hands Of when he has 5 book ")
-    @Test
-    void testListBooksInHandsOf_WhenHeHas5Book() {
-        // Given
-
-
-        // When
-
-
-        // Then
-
-    }
-
-    }
 }
 
