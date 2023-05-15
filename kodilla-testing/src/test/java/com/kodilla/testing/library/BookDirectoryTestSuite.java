@@ -1,5 +1,7 @@
 package com.kodilla.testing.library;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -13,24 +15,29 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
+@Nested
 @ExtendWith(MockitoExtension.class)
+@DisplayName("Book Directory Test Suit")
 class BookDirectoryTestSuite {
-    private List<Book> generateListOfNBooks(int booksQuantity) {
-        List<Book> resultList = new ArrayList<>();
-        for (int n = 1; n <= booksQuantity; n++) {
-            Book theBook = new Book("Title " + n, "Author " + n, 1970 + n);
-            resultList.add(theBook);
+
+    @Nested
+    @DisplayName("Method : listBooksWithCondition ")
+    class TestListBooksWithConditionFragmentShorterThan3 {
+        private List<Book> generateListOfNBooks(int booksQuantity) {
+            List<Book> resultList = new ArrayList<>();
+            for (int n = 1; n <= booksQuantity; n++) {
+                Book theBook = new Book("Title " + n, "Author " + n, 1970 + n);
+                resultList.add(theBook);
+            }
+            return resultList;
         }
-
-
-        return resultList;
-    }
 
         @Mock
         private LibraryDatabase libraryDatabaseMock;
 
+        @DisplayName("Test: List Books With Conditions Return List")
         @Test
-        void testListBooksWithConditionsReturnList () {
+        void testListBooksWithConditionsReturnList() {
 
             // Given
             BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
@@ -52,8 +59,9 @@ class BookDirectoryTestSuite {
             assertEquals(4, theListOfBooks.size());
         }
 
+        @DisplayName("Test: List Books With Condition More Than 20")
         @Test
-        void testListBooksWithConditionMoreThan20 () {
+        void testListBooksWithConditionMoreThan20() {
 
             // Given
             BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
@@ -78,19 +86,62 @@ class BookDirectoryTestSuite {
             assertEquals(0, theListOfBooks40.size());
         }
 
+        @DisplayName("Test: List Books With Condition Fragment Shorter Than 3")
+        @Test
+        void testListBooksWithConditionFragmentShorterThan3() {
+            // Given
+            LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
+            BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
 
+            // When
+            List<Book> theListOfBooks10 = bookLibrary.listBooksWithCondition("An");
+
+            // Then
+            assertEquals(0, theListOfBooks10.size());
+            verify(libraryDatabaseMock, times(0)).listBooksWithCondition(anyString());
+        }
+    }
+@Nested
+@DisplayName("Method : listBooksInHandsOf(LibraryUser libraryUser) ")
+    class ListBooksInHandsOf{
+    @DisplayName("Test: List Books In Hands Of when he has 0 book ")
     @Test
-    void testListBooksWithConditionFragmentShorterThan3() {
+    void testListBooksInHandsOf_WhenHeHas0Book() {
         // Given
-        LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
-        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+
 
         // When
-        List<Book> theListOfBooks10 = bookLibrary.listBooksWithCondition("An");
+
 
         // Then
-        assertEquals(0, theListOfBooks10.size());
-        verify(libraryDatabaseMock, times(0)).listBooksWithCondition(anyString());
+
+    }
+
+    @DisplayName("Test: List Books In Hands Of when he has 1 book ")
+    @Test
+    void testListBooksInHandsOf_WhenHeHas1Book() {
+        // Given
+
+
+        // When
+
+
+        // Then
+
+    }
+    @DisplayName("Test: List Books In Hands Of when he has 5 book ")
+    @Test
+    void testListBooksInHandsOf_WhenHeHas5Book() {
+        // Given
+
+
+        // When
+
+
+        // Then
+
+    }
+
     }
 }
 
