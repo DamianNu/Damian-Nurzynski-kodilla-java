@@ -1,6 +1,8 @@
 package com.kodilla.testing;
 
 
+import com.kodilla.testing.library.BookLibrary;
+import com.kodilla.testing.library.LibraryUser;
 import com.kodilla.testing.shape.Circle;
 import com.kodilla.testing.shape.ShapeCollector;
 import com.kodilla.testing.shape.Square;
