@@ -44,12 +44,9 @@ public class ForumStatistics {
                     averageCommentsPerPosts = numberOfComments/numberOfPosts;
                 }
             }else {
-                numberOfUser=0;
-                numberOfPosts=0;
                 numberOfComments=0;
             }
         }else {
-            numberOfUser =0;
             numberOfPosts =0;
             numberOfComments =0;
         }

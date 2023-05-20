@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @Nested
@@ -45,17 +46,14 @@ class ForumStatisticTestSuite {
             }
             return resultList;
         } else {
-
-           return resultList;
+            return resultList;
         }
     }
     private int newPostsCount(int postNumber) {
-        int a = postNumber;
-        return a;
+        return postNumber;
     }
     private int newCommentsCount(int commentsNumber) {
-        int b = commentsNumber;
-        return b;
+        return commentsNumber;
     }
 
 
@@ -68,15 +66,15 @@ class ForumStatisticTestSuite {
 
                 // Given
                 ForumStatistics forumStatistics = new ForumStatistics();
-             //   when(statisticsMock.commentsCount()).thenReturn(newCommentsCount(0));
                 when(statisticsMock.postsCount()).thenReturn(newPostsCount(0));
                 when(statisticsMock.usersNames()).thenReturn(generateUserNames(1));
                 forumStatistics.calculateAdvStatistics(statisticsMock);
+
                 // When
                 int result = forumStatistics.getNumberOfPosts();
 
                 // Then
-                Assertions.assertEquals(0,result);
+                assertEquals(0,result);
             }
 
             @DisplayName("Test: Calculate Adv Statistics when number of posts = 1000")
@@ -89,11 +87,12 @@ class ForumStatisticTestSuite {
                 when(statisticsMock.postsCount()).thenReturn(newPostsCount(1000));
                 when(statisticsMock.usersNames()).thenReturn(generateUserNames(1));
                 forumStatistics.calculateAdvStatistics(statisticsMock);
+
                 // When
                 int result = forumStatistics.getNumberOfPosts();
 
                 // Then
-                Assertions.assertEquals(1000,result);
+                assertEquals(1000,result);
             }
 
             @DisplayName("Test: Calculate Adv Statistics when number of comments = 0")
@@ -106,11 +105,12 @@ class ForumStatisticTestSuite {
                 when(statisticsMock.postsCount()).thenReturn(newPostsCount(1));
                 when(statisticsMock.usersNames()).thenReturn(generateUserNames(10));
                 forumStatistics.calculateAdvStatistics(statisticsMock);
+
                 // When
                 int result = forumStatistics.getNumberOfComments();
 
                 // Then
-                Assertions.assertEquals(0,result);
+                assertEquals(0,result);
             }
 
             @DisplayName("Test: Calculate Adv Statistics When the number of comments < the number of posts,")
@@ -123,11 +123,12 @@ class ForumStatisticTestSuite {
                 when(statisticsMock.postsCount()).thenReturn(newPostsCount(100));
                 when(statisticsMock.usersNames()).thenReturn(generateUserNames(1));
                 forumStatistics.calculateAdvStatistics(statisticsMock);
+
                 // When
                 double result = forumStatistics.getAverageCommentsPerPosts();
 
                 // Then
-                Assertions.assertTrue(result<1);
+                assertTrue(result<1);
             }
 
             @DisplayName("Test: Calculate Adv Statistics When are more comments than posts,")
@@ -140,11 +141,12 @@ class ForumStatisticTestSuite {
                 when(statisticsMock.postsCount()).thenReturn(newPostsCount(10));
                 when(statisticsMock.usersNames()).thenReturn(generateUserNames(20));
                 forumStatistics.calculateAdvStatistics(statisticsMock);
+
                 // When
                 double result = forumStatistics.getAverageCommentsPerPosts();
 
                 // Then
-                Assertions.assertEquals(10,result);
+                assertEquals(10,result);
             }
 
             @DisplayName("Test: Calculate Adv Statistics When there are no forum users,")
@@ -153,15 +155,14 @@ class ForumStatisticTestSuite {
 
                 // Given
                 ForumStatistics forumStatistics = new ForumStatistics();
-               // when(statisticsMock.commentsCount()).thenReturn(newCommentsCount(0));
-               // when(statisticsMock.postsCount()).thenReturn(newPostsCount(0));
                 when(statisticsMock.usersNames()).thenReturn(generateUserNames(0));
                 forumStatistics.calculateAdvStatistics(statisticsMock);
+
                 // When
                 int result = forumStatistics.getNumberOfUser();
 
                 // Then
-                Assertions.assertTrue(result==0);
+                assertTrue(result==0);
             }
 
             @DisplayName("Test: Calculate Adv Statistics When there are 100 forum users ,")
@@ -174,12 +175,12 @@ class ForumStatisticTestSuite {
                 when(statisticsMock.postsCount()).thenReturn(newPostsCount(10));
                 when(statisticsMock.usersNames()).thenReturn(generateUserNames(100));
                 forumStatistics.calculateAdvStatistics(statisticsMock);
+
                 // When
                 double result = forumStatistics.getNumberOfUser();
 
-
                 // Then
-                Assertions.assertEquals(100,result);
+                assertEquals(100,result);
             }
 
     }
