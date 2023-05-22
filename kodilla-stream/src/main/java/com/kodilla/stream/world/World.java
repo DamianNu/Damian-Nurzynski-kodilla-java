@@ -4,13 +4,19 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public final class World {
 
     private final List<Continent> listContinents = new ArrayList<>();
 
     public World() {
-        listContinents.add(new Continent("Europe"));
-        listContinents.add(new Continent("Africa"));
+        Continent euro = new Continent("Europa");
+        Continent africa = new Continent("Africa");
+        euro.addCountry(new Country("Germany",new BigDecimal("1000")));
+        euro.addCountry(new Country("Germdany",new BigDecimal("1001")));
+        euro.addCountry(new Country("Gerdmany",new BigDecimal("2000")));
+        listContinents.add(euro);
+        listContinents.add(africa);
         listContinents.add(new Continent("Asia"));
         listContinents.add(new Continent("Australia"));
         listContinents.add(new Continent("North America"));
@@ -20,6 +26,7 @@ public final class World {
     public List<Continent> getListContinents(){
         return new ArrayList<>(listContinents);
     }
+
 
     public BigDecimal getPeopleQuantity(){
         BigDecimal quantity = listContinents.stream()
