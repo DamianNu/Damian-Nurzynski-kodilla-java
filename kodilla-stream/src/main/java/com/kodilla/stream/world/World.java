@@ -9,24 +9,13 @@ public final class World {
 
     private final List<Continent> listContinents = new ArrayList<>();
 
-    public World() {
-        Continent euro = new Continent("Europa");
-        Continent africa = new Continent("Africa");
-        euro.addCountry(new Country("Germany",new BigDecimal("1000")));
-        euro.addCountry(new Country("Germdany",new BigDecimal("1001")));
-        euro.addCountry(new Country("Gerdmany",new BigDecimal("2000")));
-        listContinents.add(euro);
-        listContinents.add(africa);
-        listContinents.add(new Continent("Asia"));
-        listContinents.add(new Continent("Australia"));
-        listContinents.add(new Continent("North America"));
-        listContinents.add(new Continent("South America"));
-    }
-
     public List<Continent> getListContinents(){
         return new ArrayList<>(listContinents);
     }
 
+    public void addContinent(Continent continent) {
+        listContinents.add(continent);
+    }
 
     public BigDecimal getPeopleQuantity(){
         BigDecimal quantity = listContinents.stream()
