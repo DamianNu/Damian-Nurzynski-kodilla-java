@@ -1,6 +1,7 @@
 package com.kodilla.rps;
 
 public class Players {
+
     private final String firstName;
 
     public Players(final String firstName) {
@@ -10,7 +11,5 @@ public class Players {
     public String getFirstName() {
         return firstName;
     }
-
-
 
 }
