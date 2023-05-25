@@ -18,32 +18,32 @@ public class MovePlayers {
         return p;
     }
 
-    public String moveComputer(){
+    public String moveComputer() {
         Random rand = new Random();
-        int selected = rand.nextInt(0,3);
+        int selected = rand.nextInt(0, 3);
         c = rps[selected];
         return c;
     }
 
-   public void vs(int b){
+    public void vs(int b) {
         movePlayer(b);
         moveComputer();
-            if(p.equals(c)){
-                System.out.println("Player =>> " + p + " Computer =>> " + c + ": Draw round.");
-            }else if((p.equals("ROCK") && c.equals("SCISSORS")) ||
-                        (p.equals("SCISSORS") && c.equals("ROCK")) ||
-                            (p.equals("PAPER") && c.equals("ROCK"))){
-                System.out.println("Player =>> " + p +
-                                    " Computer =>> " + c +
-                                        ": Player won round.");
-                Scoring scoring = new Scoring();
-                    scoring.addPointsPlayer();
-            }else {
-                System.out.println("Player =>> " + p +
-                                    " Computer =>> " + c +
-                                        ": Computer won round.");
-                Scoring scoring = new Scoring();
-                    scoring.addPointsComputer();
-            }
-   }
+        if (p.equals(c)) {
+            System.out.println("Player =>> " + p + " Computer =>> " + c + ": Draw round.");
+        } else if ((p.equals("ROCK") && c.equals("SCISSORS")) ||
+                (p.equals("SCISSORS") && c.equals("ROCK")) ||
+                (p.equals("PAPER") && c.equals("ROCK"))) {
+            System.out.println("Player =>> " + p +
+                    " Computer =>> " + c +
+                    ": Player won round.");
+            Scoring scoring = new Scoring();
+            scoring.addPointsPlayer();
+        } else {
+            System.out.println("Player =>> " + p +
+                    " Computer =>> " + c +
+                    ": Computer won round.");
+            Scoring scoring = new Scoring();
+            scoring.addPointsComputer();
+        }
+    }
 }
