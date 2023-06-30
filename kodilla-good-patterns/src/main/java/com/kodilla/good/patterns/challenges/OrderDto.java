@@ -4,6 +4,10 @@ public class OrderDto {
     private UserShop userShop;
     private boolean isOrdered;
 
+    public UserShop getUserShop() {
+        return userShop;
+    }
+
     public OrderDto(final UserShop userShop, final boolean isOrdered) {
         this.userShop = userShop;
         this.isOrdered = isOrdered;

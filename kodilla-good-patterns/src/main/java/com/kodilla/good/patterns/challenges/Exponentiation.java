@@ -6,9 +6,10 @@ public class Exponentiation {
         System.out.println(exponentiation.exponentiationX(6));
 
     }
-    public long exponentiationX(int x){
+
+    public long exponentiationX(int x) {
         long result = 1;
-        for(int i = 1;i<x+1;i++){
+        for (int i = 1; i < x + 1; i++) {
             result = result * i;
         }
         return result;
