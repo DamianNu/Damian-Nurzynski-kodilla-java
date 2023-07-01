@@ -36,8 +36,7 @@ public class Flight implements Serializable {
 
     @Override
     public String toString() {
-
-        return "\n  Flight: " + "from >" + flightFrom +
+        return " Flight: " + "from >" + flightFrom +
                 "< to >" + flightTo + "<";
     }
 }

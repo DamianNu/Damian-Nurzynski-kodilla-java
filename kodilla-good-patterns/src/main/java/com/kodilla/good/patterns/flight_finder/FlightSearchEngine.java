@@ -12,15 +12,19 @@ public class FlightSearchEngine {
     }
 
     public void departureFrom(String cityName) {
+        System.out.println("*************** All available flights from " + cityName + " ***************");
         listFlight.stream()
                 .filter(a -> a.getFlightFrom().equals(cityName))
                 .forEach(System.out::println);
+        System.out.println("*************** ************************* ***************");
     }
 
     public void flightTo(String cityName) {
+        System.out.println("*************** All available flights to " + cityName + " ***************");
         listFlight.stream()
                 .filter(a -> a.getFlightTo().equals(cityName))
                 .forEach(System.out::println);
+        System.out.println("*************** ************************* ***************");
     }
 
     public void connectingFlight(String departureFromCity, String flightToCity) {
@@ -47,14 +51,16 @@ public class FlightSearchEngine {
                     }
                 }
             }
+            System.out.println("*************** All available flights from " + departureFromCity + " to " + flightToCity + " via another city ***************");
             for (Flight to : listDeparture) {
                 for (Flight from : flightConnecting) {
                     if (to.getFlightTo().equals(from.getFlightFrom())) {
-                        System.out.println("\n  Flight: " + "from >" + departureFromCity + "< through >" + to.getFlightTo() +
+                        System.out.println(" Flight: " + "from >" + departureFromCity + "< through >" + to.getFlightTo() +
                                 "< to >" + flightToCity + "<");
                     }
                 }
             }
+            System.out.println("*************** ************************* ***************");
         }
     }
 }

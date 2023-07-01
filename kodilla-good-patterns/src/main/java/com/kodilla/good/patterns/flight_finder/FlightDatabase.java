@@ -17,15 +17,20 @@ public class FlightDatabase implements Serializable {
         return listFlight;
     }
 
-    public void setListFlight(ArrayList<Flight> listFlight) {
-        this.listFlight = listFlight;
-    }
-
     public void addFlightToList(Flight flight) {
         listFlight.clear();
         loadListFlight();
         listFlight.add(flight);
         saveListFlight();
+    }
+
+    public void showFlightList() {
+        loadListFlight();
+        System.out.println("*************** List of available flights ***************");
+        listFlight.stream()
+                .forEach(System.out::println);
+        System.out.println("*************** ************************* ***************");
+
     }
 
     private void saveListFlight() {
