@@ -1,6 +1,5 @@
 package com.kodilla.good.patterns.flight_finder;
 
-;
 import java.io.Serializable;
 import java.util.Objects;
 
