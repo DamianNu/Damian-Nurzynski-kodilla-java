@@ -1,69 +1,47 @@
 package com.kodilla.good.patterns.flight_finder;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlightDatabase implements Serializable {
-    private Flight flight;
-    private ArrayList<Flight> listFlight = new ArrayList<>();
-    File flightDatabase = new File("kodilla-good-patterns/src/main/resources/listFlight");
-
-    public Flight getFlight() {
-        return flight;
+public class FlightDatabase {
+    private List<Flight> listFlight;
+    public FlightDatabase(){
+        listFlight = new ArrayList<>();
+        listFlight.add(new Flight("Warszawa","Gdańsk"));
+        listFlight.add(new Flight("Warszawa","Berlin"));
+        listFlight.add(new Flight("Warszawa","New York"));
+        listFlight.add(new Flight("Warszawa","Kraków"));
+        listFlight.add(new Flight("Warszawa","Londyn"));
+        listFlight.add(new Flight("Gdańsk","Kraków"));
+        listFlight.add(new Flight("Gdańsk","Londyn"));
+        listFlight.add(new Flight("Gdańsk","Pekin"));
+        listFlight.add(new Flight("Gdańsk","Atlanta"));
+        listFlight.add(new Flight("Gdańsk","Dubaj"));
+        listFlight.add(new Flight("Berlin","Dubaj"));
+        listFlight.add(new Flight("Berlin","Atlanta"));
+        listFlight.add(new Flight("Berlin","Gdańsk"));
+        listFlight.add(new Flight("Berlin","Londyn"));
+        listFlight.add(new Flight("Atlanta","Londyn"));
+        listFlight.add(new Flight("Atlanta","Kraków"));
+        listFlight.add(new Flight("Atlanta","New York"));
+        listFlight.add(new Flight("Atlanta","Dubaj"));
+        listFlight.add(new Flight("Atlanta","Warszawa"));
+        listFlight.add(new Flight("Atlanta","Pekin"));
+        listFlight.add(new Flight("Atlanta","Gdańsk"));
+        listFlight.add(new Flight("Kraków","Dubaj"));
+        listFlight.add(new Flight("Kraków","Pekin"));
+        listFlight.add(new Flight("Kraków","Atlanta"));
+        listFlight.add(new Flight("Kraków","Londyn"));
+        listFlight.add(new Flight("Londyn","Atlanta"));
+        listFlight.add(new Flight("Londyn","Dubaj"));
+        listFlight.add(new Flight("Londyn","Gdańsk"));
+        listFlight.add(new Flight("Londyn","Kraków"));
+        listFlight.add(new Flight("Dubaj","Londyn"));
+        listFlight.add(new Flight("Pekin","Warszawa"));
+        listFlight.add(new Flight("New York","Londyn"));
     }
 
-    public ArrayList<Flight> getListFlight() {
+    public List<Flight> getListFlight() {
         return listFlight;
-    }
-
-    public void addFlightToList(Flight flight) {
-        listFlight.clear();
-        loadListFlight();
-        listFlight.add(flight);
-        saveListFlight();
-    }
-
-    public void showFlightList() {
-        loadListFlight();
-        System.out.println("*************** List of available flights ***************");
-        listFlight.stream()
-                .forEach(System.out::println);
-        System.out.println("*************** ************************* ***************");
-
-    }
-
-    private void saveListFlight() {
-        try {
-            FileOutputStream fileOut =
-                    new FileOutputStream(flightDatabase);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(listFlight);
-            out.close();
-            fileOut.close();
-            System.out.println("Serialized data is saved in flightDatabase");
-        } catch (IOException i) {
-            i.printStackTrace();
-            System.out.println("File write error");
-        }
-    }
-
-    public void loadListFlight() {
-        listFlight.clear();
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(flightDatabase));
-            Object readList = ois.readObject();
-            if (readList instanceof List<?>) {
-                listFlight.addAll((ArrayList) readList);
-                System.out.println("File loaded correctly");
-            }
-            ois.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-            System.out.println("File read error");
-        } catch (ClassNotFoundException c) {
-            System.out.println("Flight database file missing");
-            c.printStackTrace();
-        }
     }
 }

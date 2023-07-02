@@ -1,9 +1,8 @@
 package com.kodilla.good.patterns.flight_finder;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-public class Flight implements Serializable {
+public class Flight {
     private String flightFrom;
     private String flightTo;
 

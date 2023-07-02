@@ -5,10 +5,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FlightSearchEngine {
-    private ArrayList<Flight> listFlight;
+    private List<Flight> listFlight;
 
-    public FlightSearchEngine(ArrayList<Flight> listFlight) {
+    public FlightSearchEngine(List<Flight> listFlight) {
         this.listFlight = listFlight;
+    }
+
+    public void showFullListOfFlights(){
+        System.out.println("*************** List of available flights ***************");
+        listFlight.stream()
+                .forEach(System.out::println);
+        System.out.println("*************** ************************* ***************");
     }
 
     public void departureFrom(String cityName) {
