@@ -1,68 +1,32 @@
 package com.kodilla.spring.calculator;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class CalculatorTestSuite {
-    @Autowired
-    Calculator calculator;
-    @Test
-    void testAddAToB() {
-        //Given
-        //do nothing
-        //When
-        double result = calculator.add(1.5,3.5);
-
-        //Then
-        assertEquals(result,5.0);
-    }
 
     @Test
-    void testSubtractAToB() {
+    void testCalculations() {
         //Given
-        //do nothing
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Calculator calculator = (Calculator) context.getBean("calculator");
+
         //When
-        double result = calculator.sub(5.2,1.7);
+        double resultAdd = calculator.add(1.5, 3.5);
+        double resultSub = calculator.sub(7.5, 3.5);
+        double resultMul = calculator.mul(1.2, 4.5);
+        double resultDiv = calculator.div(9.9, 3.3);
 
         //Then
-        assertEquals(result,3.5);
-    }
+        assertEquals(resultAdd, 5.0, 0.00001);
+        assertEquals(resultSub, 4.0, 0.00001);
+        assertEquals(resultMul, 5.4, 0.00001);
+        assertEquals(resultDiv, 3.0, 0.00001);
 
-    @Test
-    void testMultiplicationOfAToB() {
-        //Given
-        //do nothing
-        //When
-        double result = calculator.mul(6.0,1.5);
-
-        //Then
-        assertEquals(result,9.0);
-    }
-
-    @Test
-    void testDivisionAToB() {
-        //Given
-        //do nothing
-        //When
-        double result = calculator.div(12.0,2.0);
-
-        //Then
-        assertEquals(result,6.0);
-    }
-
-    @Test
-    void testDivideABy0() {
-        //Given
-        //do nothing
-        //When
-        double result = calculator.div(12.0,0.0);
-
-        //Then
-        assertEquals(result,0.0);
     }
 }
