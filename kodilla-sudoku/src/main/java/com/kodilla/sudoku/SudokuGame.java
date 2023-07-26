@@ -1,9 +1,5 @@
 package com.kodilla.sudoku;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 public class SudokuGame {
     private SudokuBoard sudokuBoard;
     private Controler controler;
