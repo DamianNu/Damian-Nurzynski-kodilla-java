@@ -20,23 +20,29 @@ public class InvoiceDaoTestSuite {
     @Autowired
     private ProductDao productDao;
 
+    @Autowired
+    private ItemDao itemDao;
+
     @Test
     void testInvoiceDaoSave() {
         //Given
         Product milk = new Product("milk");
         Product broad = new Product("broad");
         Product onion = new Product("onion");
+
         Invoice invoice = new Invoice("F-00200201");
-        Item itemMilk = new Item(milk,new BigDecimal(10.50), 5);
-        Item itemMilk2 = new Item(milk,new BigDecimal(7.50), 5);
-        Item itemBroad = new Item(broad,new BigDecimal(12.00), 3);
-        Item itemOnion = new Item(onion,new BigDecimal(6.00), 2);
-        Item itemOnion2 = new Item(onion,new BigDecimal(3.00), 2);
-        itemMilk.setInvoices(invoice);
-        itemMilk2.setInvoices(invoice);
-        itemBroad.setInvoices(invoice);
-        itemOnion.setInvoices(invoice);
-        itemOnion2.setInvoices(invoice);
+
+        Item itemMilk = new Item(milk, new BigDecimal(10.50), 5);
+        Item itemMilk2 = new Item(milk, new BigDecimal(7.50), 5);
+        Item itemBroad = new Item(broad, new BigDecimal(12.00), 3);
+        Item itemOnion = new Item(onion, new BigDecimal(6.00), 2);
+        Item itemOnion2 = new Item(onion, new BigDecimal(3.00), 2);
+
+        itemMilk.setInvoice(invoice);
+        itemMilk2.setInvoice(invoice);
+        itemBroad.setInvoice(invoice);
+        itemOnion.setInvoice(invoice);
+        itemOnion2.setInvoice(invoice);
 
         invoice.getItems().add(itemMilk);
         invoice.getItems().add(itemMilk2);
@@ -49,10 +55,9 @@ public class InvoiceDaoTestSuite {
         int id = invoice.getId();
 
         //Then
-        Assertions.assertNotEquals(0,id);
+        Assertions.assertNotEquals(0, id);
 
         //CleanUp
-        productDao.deleteAll();
         invoiceDao.deleteById(id);
     }
 }
