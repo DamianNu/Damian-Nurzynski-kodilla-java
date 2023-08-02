@@ -2,17 +2,25 @@ package com.kodilla.hibernate.manytomany.dao;
 
 import com.kodilla.hibernate.manytomany.Company;
 import com.kodilla.hibernate.manytomany.Employee;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+@Transactional
 @SpringBootTest
 class CompanyDaoTestSuite {
 
     @Autowired
     private CompanyDao companyDao;
+
+    @Autowired
+    private EmployeeDao employeeDao;
 
     @Test
     void testSaveManyToMany() {
@@ -51,12 +59,62 @@ class CompanyDaoTestSuite {
         assertNotEquals(0, greyMatterId);
 
         //CleanUp
-        //try {
-        //    companyDao.deleteById(softwareMachineId);
-        //    companyDao.deleteById(dataMaestersId);
-        //    companyDao.deleteById(greyMatterId);
-        //} catch (Exception e) {
-        //    //do nothing
-        //}
+        try {
+            companyDao.deleteById(softwareMachineId);
+            companyDao.deleteById(dataMaestersId);
+            companyDao.deleteById(greyMatterId);
+        } catch (Exception e) {
+            //do nothing
+        }
+    }
+
+    @Test
+    void  testMethodsNamedQueryCompanyAndEmployee(){
+        //Given
+        Employee janeDoe = new Employee("Jane", "Doe");
+        Employee peterBrown = new Employee("Peter", "Brown");
+        Employee davidWilliams = new Employee("David", "Williams");
+
+        Company softwareRainbow = new Company("Software Rainbow");
+        Company dataTalisman = new Company("Data Talisman");
+        Company xylophone = new Company("Xylophone");
+
+
+        //When
+        employeeDao.save(janeDoe);
+        int janeDoeId = janeDoe.getId();
+        employeeDao.save(peterBrown);
+        int peterBrownId = peterBrown.getId();
+        employeeDao.save(davidWilliams);
+        int davidWilliamsId = davidWilliams.getId();
+
+        companyDao.save(softwareRainbow);
+        int softwareRainbowId = softwareRainbow.getId();
+        companyDao.save(dataTalisman);
+        int dataTalismanId = dataTalisman.getId();
+        companyDao.save(xylophone);
+        int xylophoneId = xylophone.getId();
+
+        List<Employee> employees = employeeDao.searchBySurname("Doe");
+        List<Company> companies = companyDao.searchForACompanyBy3Letters();
+
+        //Then
+        assertEquals(4,employees.size());
+        assertEquals("Jane",employees.get(0).getFirstname());
+        assertEquals(4,companies.size());
+        assertEquals("Xylophone",companies.get(0).getName());
+
+
+        //CleanUp
+        try {
+            companyDao.deleteById(softwareRainbowId);
+            companyDao.deleteById(dataTalismanId);
+            companyDao.deleteById(xylophoneId);
+            employeeDao.deleteById(janeDoeId);
+            employeeDao.deleteById(peterBrownId);
+            employeeDao.deleteById(davidWilliamsId);
+        } catch (Exception e) {
+            //do nothing
+        }
     }
 }

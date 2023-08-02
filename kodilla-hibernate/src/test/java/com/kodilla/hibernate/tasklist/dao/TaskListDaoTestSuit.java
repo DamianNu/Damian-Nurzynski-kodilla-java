@@ -58,12 +58,11 @@ class TaskListDaoTestSuit {
         //When
         taskListDao.save(taskList);
         int id = taskList.getId();
-        String idd = "" + id;
 
         //Then
         assertNotEquals(0, id);
 
         //CleanUp
-        taskListDao.deleteById(idd);
+        taskListDao.deleteById(id);
     }
 }
