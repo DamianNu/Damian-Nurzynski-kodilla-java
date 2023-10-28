@@ -99,9 +99,9 @@ class CompanyDaoTestSuite {
         List<Company> companies = companyDao.searchForACompanyBy3Letters();
 
         //Then
-        assertEquals(4,employees.size());
+        assertEquals(1,employees.size());
         assertEquals("Jane",employees.get(0).getFirstname());
-        assertEquals(4,companies.size());
+        assertEquals(1,companies.size());
         assertEquals("Xylophone",companies.get(0).getName());
 
 
