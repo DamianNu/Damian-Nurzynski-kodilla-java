@@ -12,6 +12,10 @@ import java.util.List;
                 " WHERE (LEFT(COMPANY_NAME, 3) = 'Xyl') ",
         resultClass = Company.class
 )
+@NamedQuery(
+        name = "Company.searchByPartName",
+        query = " FROM Company WHERE name LIKE :PART_NAME"
+)
 @Entity
 @Table(name = "COMPANIES")
 public class Company {
