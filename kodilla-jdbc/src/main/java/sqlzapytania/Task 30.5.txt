@@ -1,0 +1,35 @@
+-- *************************** TASK 30.5 ***************************
+
+-- create table STATS
+CREATE TABLE STATS
+(
+    STAT_ID   INT(11)     NOT NULL AUTO_INCREMENT,
+    STAT_DATE DATETIME    NOT NULL,
+    STAT      VARCHAR(20) NOT NULL,
+    VALUE     INT(11)     NOT NULL,
+    PRIMARY KEY (STAT_ID)
+);
+
+-- create view BESTSELLERS_COUNT
+CREATE VIEW BESTSELLERS_COUNT AS
+SELECT COUNT(*) AS COUNT
+FROM BOOKS
+WHERE BESTSELLER = 2;
+
+-- create event STATISTIC_BESTSELLERS
+USE KODILLA_COURSE;
+
+DELIMITER $$
+
+CREATE EVENT STATISTIC_BESTSELLERS
+    ON SCHEDULE EVERY 2 MINUTE
+    DO
+    BEGIN
+        CALL UpdateBestsellers();
+        insert into STATS(STAT_DATE, STAT, VALUE)
+        values(CURTIME(), 'BESTSELLERS', (SELECT COUNT FROM BESTSELLERS_COUNT));
+    END $$
+
+DELIMITER ;
+
+-- *************************** ********* ***************************

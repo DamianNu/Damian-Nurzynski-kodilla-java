@@ -1,0 +1,26 @@
+-- *************************** TASK 30.6 ***************************
+
+
+EXPLAIN
+SELECT *
+FROM READERS
+WHERE FIRSTNAME = 'John';
+
+EXPLAIN
+SELECT TITLE
+FROM BOOKS;
+
+CREATE INDEX INDBOOKS ON BOOKS (TITLE);
+
+CREATE INDEX INDREADERS ON READERS (FIRSTNAME, LASTNAME);
+
+EXPLAIN
+SELECT *
+FROM READERS
+WHERE FIRSTNAME = 'John';
+
+EXPLAIN
+SELECT TITLE
+FROM BOOKS;
+
+-- *************************** ********* ***************************

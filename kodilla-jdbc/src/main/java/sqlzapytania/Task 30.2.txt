@@ -1,0 +1,69 @@
+-- ********** Task 30.2 **********
+
+    -- Create column 'BESTSELLER' in the table 'BOOKS'
+ALTER TABLE BOOKS
+    ADD COLUMN BESTSELLER BOOLEAN DEFAULT 0;
+    -- Create function StatusBook
+DROP FUNCTION IF EXISTS StatusBook;
+
+DELIMITER $$
+
+CREATE FUNCTION StatusBook(bookStatus INT) RETURNS INT(1)
+    DETERMINISTIC
+BEGIN
+    DECLARE result INT(1) DEFAULT 1;
+    IF bookStatus >= 2 THEN
+        SET result = 2;
+    ELSE
+        SET result = 1;
+    END IF;
+    RETURN result;
+END $$
+
+DELIMITER ;
+
+    -- Create procedure UpdateBestsellers
+DROP PROCEDURE IF EXISTS UpdateBestsellers;
+
+DELIMITER $$
+
+CREATE PROCEDURE UpdateBestsellers()
+BEGIN
+    DECLARE NUMBER_RENTALS,DAYS_RENTALS,ID_BOOK INT;
+    DECLARE RENTAL_PER_MONTH DECIMAL(5, 2);
+    DECLARE FINISHED INT DEFAULT 0;
+    DECLARE ALL_RENTS CURSOR FOR SELECT RENT_ID FROM RENTS;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET FINISHED = 1;
+    OPEN ALL_RENTS;
+    WHILE (FINISHED = 0)
+        DO
+            FETCH ALL_RENTS INTO ID_BOOK;
+            IF (FINISHED = 0) THEN
+                SELECT COUNT(*)
+                FROM RENTS
+                WHERE BOOK_ID = ID_BOOK
+                INTO NUMBER_RENTALS;
+
+                SELECT DATEDIFF(MAX(RENT_DATE), MIN(RENT_DATE)) + 1
+                FROM RENTS
+                WHERE BOOK_ID = ID_BOOK
+                INTO DAYS_RENTALS;
+
+                SET RENTAL_PER_MONTH = NUMBER_RENTALS / DAYS_RENTALS * 30;
+
+                UPDATE BOOKS
+                SET BESTSELLER = StatusBook(RENTAL_PER_MONTH)
+                WHERE BOOK_ID = ID_BOOK;
+                COMMIT;
+            END IF;
+        END WHILE;
+    CLOSE ALL_RENTS;
+END $$
+
+DELIMITER  ;
+
+CALL UpdateBestsellers;
+
+
+
+-- ***********************************************************************
